@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Clock - Joana Inacio</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.37/moment-timezone-with-data-1970-2030.min.js"></script>
+
+    <style>
+      body {
+        background-color: #f9f7fe;
+        font-family: sans-serif;
+      }
+      h1 {
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 36px;
+      }
+      h2 {
+        margin: 0 0 5px;
+        font-size: 28px;
+      }
+      select {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+        border-radius: 4px;
+        padding: 10px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 60px auto;
+        background: white;
+        padding: 30px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 10px;
+      }
+      .city {
+        display: flex;
+        margin: 10px 0;
+        justify-content: space-between;
+        padding: 30px 0;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+      }
+      .city:last-child {
+        border: none;
+      }
+      .date {
+        opacity: 0.7;
+      }
+      .time {
+        font-size: 48px;
+        font-weight: bold;
+      }
+      .time small {
+        font-size: 24px;
+        vertical-align: middle;
+        line-height: 48px;
+      }
+      footer {
+        text-align: center;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>World Clock</h1>
+
+      <select id="city">
+        <option value="">Select a city..</option>
+        <option value="Europe/Lisbon">Lisbon &#x1F1F5;&#x1F1F9;</option>
+        <option value="Europe/London">London &#x1F1EC;&#x1F1E7;</option>
+        <option value="America/New_York">New York &#x1F1FA;&#x1F1F8;</option>
+        <option value="Asia/Tokyo">Tokyo &#x1F1EF;&#x1F1F5;</option>
+      </select>
+
+      <div id="cities">
+        <div class="city" id="lisbon">
+          <div>
+            <h2>Lisbon &#x1F1F5;&#x1F1F9;</h2>
+            <div class="date"></div>
+          </div>
+          <div class="time"></div>
+        </div>
+        <div class="city" id="paris">
+          <div>
+            <h2>Paris &#x1F1EB;&#x1F1F7;</h2>
+            <div class="date"></div>
+          </div>
+          <div class="time"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      This project was coded with ❤️ by
+      <strong
+        ><a href="https://github.com/JoanaInacio" target="_blank"
+          >Joana Inacio</a
+        ></strong
+      >
+      and is
+      <a
+        href="https://github.com/JoanaInacio/World-Clock-Project-Multiple-Locations"
+        target="_blank"
+      >
+        open sourced on GitHub</a
+      >
+    </footer>
+
+    <script>
+      function updateTime() {
+        let lisbonElement = document.querySelector("#lisbon");
+        if (lisbonElement) {
+          let lisbonDateElement = lisbonElement.querySelector(".date");
+          let lisbonTimeElement = lisbonElement.querySelector(".time");
+          let lisbonTime = moment().tz("Europe/Lisbon");
+          lisbonDateElement.innerHTML = lisbonTime.format("MMMM Do YYYY");
+          lisbonTimeElement.innerHTML = lisbonTime.format(
+            "h:mm:ss [<small>]A[</small>]"
+          );
+        }
+
+        let parisElement = document.querySelector("#paris");
+        if (parisElement) {
+          let parisDateElement = parisElement.querySelector(".date");
+          let parisTimeElement = parisElement.querySelector(".time");
+          let parisTime = moment().tz("Europe/Paris");
+          parisDateElement.innerHTML = parisTime.format("MMMM Do YYYY");
+          parisTimeElement.innerHTML = parisTime.format(
+            "h:mm:ss [<small>]A[</small>]"
+          );
+        }
+
+        let londonElement = document.querySelector("#london");
+        if (londonElement) {
+          let londonDateElement = londonElement.querySelector(".date");
+          let londonTimeElement = londonElement.querySelector(".time");
+          let londonTime = moment().tz("Europe/London");
+          londonDateElement.innerHTML = londonTime.format("MMMM Do YYYY");
+          londonTimeElement.innerHTML = londonTime.format(
+            "h:mm:ss [<small>]A[</small>]"
+          );
+        }
+
+        let newYorkElement = document.querySelector("#new-york");
+        if (newYorkElement) {
+          let newYorkDateElement = newYorkElement.querySelector(".date");
+          let newYorkTimeElement = newYorkElement.querySelector(".time");
+          let newYorkTime = moment().tz("America/New_York");
+          newYorkDateElement.innerHTML = newYorkTime.format("MMMM Do YYYY");
+          newYorkTimeElement.innerHTML = newYorkTime.format(
+            "h:mm:ss [<small>]A[</small>]"
+          );
+        }
+
+        let tokyoElement = document.querySelector("#tokyo");
+        if (tokyoElement) {
+          let tokyoDateElement = tokyoElement.querySelector(".date");
+          let tokyoTimeElement = tokyoElement.querySelector(".time");
+          let tokyoTime = moment().tz("Asia/Tokyo");
+          tokyoDateElement.innerHTML = tokyoTime.format("MMMM Do YYYY");
+          tokyoTimeElement.innerHTML = tokyoTime.format(
+            "h:mm:ss [<small>]A[</small>]"
+          );
+        }
+      }
+
+      function updateCity(event) {
+        let cityTimeZone = event.target.value;
+        let citiesElement = document.querySelector("#cities");
+
+        if (cityTimeZone === "Europe/Lisbon") {
+          let existingLisbon = document.querySelector("#lisbon");
+          if (!existingLisbon) {
+            let lisbonTime = moment().tz("Europe/Lisbon");
+            citiesElement.innerHTML += `
+                        <div class="city" id="lisbon">
+                            <div>
+                                <h2>Lisbon &#x1F1F5;&#x1F1F9;</h2>
+                                <div class="date">${lisbonTime.format(
+                                  "MMMM Do YYYY"
+                                )}</div>
+                            </div>
+                            <div class="time">${lisbonTime.format(
+                              "h:mm:ss"
+                            )} <small>${lisbonTime.format("A")}</small></div>
+                        </div>
+                    `;
+          }
+        }
+
+        if (cityTimeZone === "Europe/London") {
+          let existingLondon = document.querySelector("#london");
+          if (!existingLondon) {
+            let londonTime = moment().tz("Europe/London");
+            citiesElement.innerHTML += `
+                        <div class="city" id="london">
+                            <div>
+                                <h2>London &#x1F1EC;&#x1F1E7;</h2>
+                                <div class="date">${londonTime.format(
+                                  "MMMM Do YYYY"
+                                )}</div>
+                            </div>
+                            <div class="time">${londonTime.format(
+                              "h:mm:ss"
+                            )} <small>${londonTime.format("A")}</small></div>
+                        </div>
+                    `;
+          }
+        }
+
+        if (cityTimeZone === "America/New_York") {
+          let existingNewYork = document.querySelector("#new-york");
+          if (!existingNewYork) {
+            let newYorkTime = moment().tz("America/New_York");
+            citiesElement.innerHTML += `
+                        <div class="city" id="new-york">
+                            <div>
+                                <h2>New York &#x1F1FA;&#x1F1F8;</h2>
+                                <div class="date">${newYorkTime.format(
+                                  "MMMM Do YYYY"
+                                )}</div>
+                            </div>
+                            <div class="time">${newYorkTime.format(
+                              "h:mm:ss"
+                            )} <small>${newYorkTime.format("A")}</small></div>
+                        </div>
+                    `;
+          }
+        }
+
+        if (cityTimeZone === "Asia/Tokyo") {
+          let existingTokyo = document.querySelector("#tokyo");
+          if (!existingTokyo) {
+            let tokyoTime = moment().tz("Asia/Tokyo");
+            citiesElement.innerHTML += `
+                        <div class="city" id="tokyo">
+                            <div>
+                                <h2>Tokyo &#x1F1EF;&#x1F1F5;</h2>
+                                <div class="date">${tokyoTime.format(
+                                  "MMMM Do YYYY"
+                                )}</div>
+                            </div>
+                            <div class="time">${tokyoTime.format(
+                              "h:mm:ss"
+                            )} <small>${tokyoTime.format("A")}</small></div>
+                        </div>
+                    `;
+          }
+        }
+
+        event.target.value = "";
+      }
+
+      updateTime();
+      setInterval(updateTime, 1000);
+
+      let citiesSelectElement = document.querySelector("#city");
+      citiesSelectElement.addEventListener("change", updateCity);
+    </script>
+  </body>
+</html>
